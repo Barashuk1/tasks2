@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quote Detail</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ quote.text }}</h1>
+        <p>Author: {{ quote.author.name }}</p>
+        <p>Tags:
+            {% for tag in quote.tags.all %}
+                <span>{{ tag.name }}</span>
+            {% endfor %}
+        </p>
+        
+        <a href="{% url 'index' %}">Повернутися на головну</a>
+    </div>
+</body>
+</html>

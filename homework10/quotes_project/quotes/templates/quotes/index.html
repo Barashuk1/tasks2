@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quotes List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Цитати</h1>
+        
+        <div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}"><button>Вихід</button></a>
+                <a href="{% url 'add_quote' %}"><button>Додати цитату</button></a>
+            {% else %}
+                <a href="{% url 'register' %}"><button>Реєстрація</button></a>
+                <a href="{% url 'login' %}"><button>Вхід</button></a>
+            {% endif %}
+        </div>
+
+        {% if quotes %}
+            <div class="quotes-list">
+                {% for quote in quotes %}
+                    <div class="quote">
+                        <p><strong>"{{ quote.text }}"</strong></p>
+                        <p>Автор: {{ quote.author.name }} <a href="https://www.instagram.com/joon_barash/" target="_blank">Instagram</a></p>
+                        <p>Теги:
+                            {% for tag in quote.tags.all %}
+                                <span class="tag">{{ tag.name }}</span>
+                            {% endfor %}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Наразі немає жодних цитат.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
